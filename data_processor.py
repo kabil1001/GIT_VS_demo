@@ -7,12 +7,11 @@ import os
 from format_config import InputFileName, OutputFileName
 
 def Data_Preprocessor(Fiscal_Data):
-    
+
     date_columns = Fiscal_Data.columns[Fiscal_Data.columns.str.upper(
     ).str.contains("DATE")]
 
     def date_format(df, date_columns):
-
         data = df.copy()
         for col in date_columns:
             data[col] = pd.to_datetime(data[col]).apply(lambda x: datetime.strftime(x, format="%Y-%m-%d") if pd.notna(x) else str(x))
